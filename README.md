@@ -1,1 +1,1 @@
-# HandwritingRecognition
+# Handwriting Recognition
