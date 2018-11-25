@@ -1,19 +1,17 @@
-from tensorflow.examples.tutorials.mnist import input_data
-from _random import Random
-from mlxtend.data.local_mnist import loadlocal_mnist
-#from pip._vendor.distlib.compat import raw_input
 
 print("importing tensorflow, input data sets")
 
 import tensorflow as tf
 import keras
 import numpy 
-import matplotlib.pyplot
+import matplotlib.pyplot as plot
 from mlxtend.data import loadlocal_mnist
 
 training_images, training_labels = loadlocal_mnist(
     images_path='./data/train-images-idx3-ubyte',
     labels_path='./data/train-labels-idx1-ubyte')
+
+#training_images[1] = training_images[1].reshape(28, 28)
 
 print('\nTraining Dataset')
 print('Dimensions of Images: ', training_images.shape[0], ' x ', training_images.shape[1])
@@ -28,6 +26,11 @@ print('\nTesting Dataset')
 print('Dimensions of Images: ', testing_images.shape[0], ' x ', testing_images.shape[1])
 print('Number of Labels: ', len(testing_labels))
 #print(testing_labels)
+
+plot.figure()
+plot.imshow(training_images[0])
+plot.colorbar()
+plot.grid(False)
 
 
 
