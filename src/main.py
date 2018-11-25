@@ -1,15 +1,39 @@
 from tensorflow.examples.tutorials.mnist import input_data
+from _random import Random
+from mlxtend.data.local_mnist import loadlocal_mnist
 #from pip._vendor.distlib.compat import raw_input
-
 
 print("importing tensorflow, input data sets")
 
 import tensorflow as tf
-#import keras
-mnist = input_data.read_data_sets('./data/', one_hot=True)
-#mnist = input_data.read_data_sets(raw_input(), raw_input(), raw_input())
+import keras
+import numpy 
+import matplotlib.pyplot
+from mlxtend.data import loadlocal_mnist
+
+training_images, training_labels = loadlocal_mnist(
+    images_path='./data/train-images-idx3-ubyte',
+    labels_path='./data/train-labels-idx1-ubyte')
+
+print('\nTraining Dataset')
+print('Dimensions of Images: ', training_images.shape[0], ' x ', training_images.shape[1])
+print('Number of Labels: ', len(training_labels))
+#print(training_labels)
+
+testing_images, testing_labels = loadlocal_mnist(
+    images_path='./data/t10k-images-idx3-ubyte',
+    labels_path='./data/t10k-labels-idx1-ubyte')
+
+print('\nTesting Dataset')
+print('Dimensions of Images: ', testing_images.shape[0], ' x ', testing_images.shape[1])
+print('Number of Labels: ', len(testing_labels))
+#print(testing_labels)
 
 
+
+
+
+'''
 print("initializing x, W, b, y, y_")
 
 x = tf.placeholder(tf.float32, [None, 784])
@@ -21,6 +45,7 @@ y = tf.matmul(x,W) + b
 y_ = tf.placeholder(tf.float32, [None,10])
 
 print('initialized')
+
 
 
 
@@ -51,4 +76,4 @@ print("results")
 
 result = sess.run(tf.arg_max(y,1), feed_dict={x:mnist.validation.images})
 print (" ".join(map(str,result)))
-
+''' 
