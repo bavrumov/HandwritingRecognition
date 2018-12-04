@@ -11,8 +11,43 @@ import math
 from mlxtend.data import loadlocal_mnist
 import random
 
+# METRIC REDEFINITION
 def get_categorical_accuracy_keras(y_true, y_pred):
     return kbe.mean(kbe.equal(kbe.argmax(y_true, axis=1), kbe.argmax(y_pred, axis=1)))
+
+
+# GRAPHING TO LOOK AT FULL CHANNEL SET
+def plotter(i, predictions_arr, correct_label, img):
+    predictions_arr, correct_label, img = predictions_arr[i], correct_label[i], img[i]
+    plot.grid(False)
+    plot.xticks([])
+    plot.yticks([])
+
+    plot.imshow(img) #cmap=plot.cm.binary
+    predicted_label = numpy.argmax(predictions_arr)
+    if predicted_label == correct_label:
+        color = 'green'
+    else:
+        color = 'red'
+
+    plot.xlabel("{} {:2.0f}% ({})".format(predicted_label,
+                                          100 * numpy.max(predictions_arr),
+                                          correct_label),
+                color=color)
+
+def plot_value_array(i, predictions_arr, correct_label):
+    predictions_arr, correct_label = predictions_arr[i], correct_label[i]
+    plot.grid(False)
+    plot.xticks([])
+    plot.yticks([])
+
+    thisplot = plot.bar(range(10), predictions_arr, color="#777777")
+    plot.ylim([0, 1])
+    predicted_label = numpy.argmax(predictions_arr)
+
+    thisplot[predicted_label].set_color('red')
+    thisplot[correct_label].set_color('green')
+
 
 
 training_images, training_labels = loadlocal_mnist(
@@ -53,6 +88,7 @@ print('\nTesting Dataset')
 print('Images: ', testing_images.shape[0], '  x  ', testing_images[1].shape)
 print('Labels: ', len(testing_labels))
 print('Label distribution: ', numpy.bincount(testing_labels))
+
 '''
 #Scaling Values from 0-255 to 0-1.0
 training_images = training_images / 255.0
@@ -99,48 +135,55 @@ plot.savefig("example.png")
 '''
 
 training_images = keras.utils.normalize(training_images, axis=1)
-#testing_images = keras.utils.normalize(testing_images, axis=1)
+testing_images = keras.utils.normalize(testing_images, axis=1)
 
 model = keras.models.Sequential()
-model.add(keras.layers.Flatten(input_shape=(28,28)))                           # Brings our 28x28 array back into a flat 1d aray
-model.add(keras.layers.Dense(128, activation=tf.nn.relu))   # Rectified Linear Unit - max(x,0)
-model.add(keras.layers.Dense(10, activation=tf.nn.softmax)) # Multiclass Probabalistic Output
+model.add(keras.layers.Flatten(input_shape=(28,28)))                                    # Brings our 28x28 array back into a flat 1d aray
+model.add(keras.layers.Dense(128, activation=tf.nn.relu, bias_initializer='zeros'))     # Rectified Linear Unit - max(x,0)
+model.add(keras.layers.Dense(128, activation=tf.nn.relu, bias_initializer='zeros'))     # Rectified Linear Unit - max(x,0)
+model.add(keras.layers.Dense(10, activation=tf.nn.softmax, bias_initializer='zeros' ))  # Multiclass Probabalistic Output
 
-model.compile(optimizer=keras.optimizers.Adam(lr=1e-6),                # RMSprop w/ momentum
+model.compile(optimizer=keras.optimizers.Adam(lr=1e-5),                                 # RMSprop w/ momentum
               loss='sparse_categorical_crossentropy',
               metrics=[get_categorical_accuracy_keras]
               )
 
 model.summary()
 
+model.fit(training_images, training_labels, epochs=1)                                   # Arbitrary Epoch Cutoff
 
-model.fit(training_images, training_labels, epochs=30)
+val_loss, val_acc = model.evaluate(testing_images, testing_labels)
+print(val_loss, val_acc)
+
+#model.save('digitizer.model')
+predictions = model.predict([testing_images])
+
+num_rows = 10
+num_cols = 5
+num_images = num_rows*num_cols
+plot.figure(figsize=(2*2*num_cols, 2*num_rows))
+for i in range(num_images):
+  plot.subplot(num_rows, 2*num_cols, 2*i+1)
+  plotter(i, predictions, testing_labels, testing_images)
+  plot.subplot(num_rows, 2*num_cols, 2*i+2)
+  plot_value_array(i, predictions, testing_labels)
+  plot.savefig('testMaster.png')
 
 
+'''
+for i in range(100):
+    print("\n\n\n+++++", numpy.argmax(predictions[i]), "+++++\n")
+    for j in range(28):
+        for k in range(28):
+            testing_images[i][j][k] = math.ceil(testing_images[i][j][k])
+            if testing_images[i][j][k] == 1:
+                testing_images[i][j][k] = 4.4
+    print(testing_images[i])
+'''
 
 
 
 '''
-# BUILDING THE MODEL
-
-model = keras.Sequential([keras.layers.Flatten(input_shape=(28,28)),         # Brings our 28x28 array back into a flat 1d aray
-                         keras.layers.Dense(128, activation=tf.nn.relu),    # Rectified Linear Unit - max(x,0)
-                         keras.layers.Dense(10, activation=tf.nn.softmax)   # Multiclass Probabalistic Output
-                        ])
-
-model.compile(optimizer='adam',       # RMSprop w/ momentum
-              loss='sparse_categorical_crossentropy',     # ----
-              metrics=[get_categorical_accuracy_keras])                     # Fraction of correct classifications
-
-
-model.fit(training_images, training_labels, epochs=10)  # Arbitrary epoch cut-off
-'''
-
-
-
-
-'''
-
 print("initializing x, W, b, y, y_")
 
 x = tf.placeholder(tf.float32, [None, 784])
