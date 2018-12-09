@@ -14,10 +14,10 @@ import struct
 
 class Model(object):
     kerasModel = keras.models.Sequential()
-    label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-                   'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
+    label_names = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
                    'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-                   'Y', 'Z']
+                   'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                   'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     # GRAPHING TO LOOK AT FULL CHANNEL SET
     def plotter(self, i, predictions_arr, correct_label, img):
@@ -119,10 +119,12 @@ class Model(object):
 
         predict_image = keras.utils.normalize(predict_image, axis=1)
 
-        predictions = self.kerasModel.predict(predict_image) #this will work on user input data yay
+        #predictions = self.kerasModel.predict(predict_image) #this will work on user input data yay
+
+        predictions = self.kerasModel.predict([predict_image])
 
         print(self.label_names[numpy.argmax(predictions)])
-
+        print(predictions)
 
 
 

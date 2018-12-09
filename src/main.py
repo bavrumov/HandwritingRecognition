@@ -2,10 +2,10 @@ import os
 from PIL import Image
 from array import *
 from model import Model
-
-
-img = Image.open('scaledinput.png').convert('LA')
-img.save('grayscaledinput.png')
+#
+#
+# img = Image.open('scaledinput.png').convert('LA')
+# img.save('grayscaledinput.png')
 
 file = 'grayscaledinput.png'
 
