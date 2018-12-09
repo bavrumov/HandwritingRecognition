@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import logo from './tf.png';
 import './App.css';
+import './lit.css'
+import SavableCanvas from './SavableCanvas';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <img src={logo} className="App-logo" alt="logo" />
+        <SavableCanvas initialize="true"></SavableCanvas>
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
             Anything we want can go here. Anything about tensor, or a component that will let us draw and export an input.
           </p>
