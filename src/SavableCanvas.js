@@ -4,7 +4,7 @@ import {LiterallyCanvasReactComponent, tools, ClearButton} from 'literallycanvas
 
 export class SavableCanvas extends Component {
   static propTypes = {
-    initialize : PropTypes.boolean,
+    initialize : PropTypes.bool,
   }
   
   render() {
@@ -22,6 +22,7 @@ export class SavableCanvas extends Component {
           onInit = {(lc) => {console.log("initialized with", lc);}}
           strokeWidths = {[30]}
           tools = {[tools.Pencil]}
+          toolbarPosition = "bottom"
           
         >
         <ClearButton></ClearButton>
