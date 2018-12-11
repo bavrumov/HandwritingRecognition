@@ -23,6 +23,7 @@ export class SavableCanvas extends Component {
           strokeWidths = {[30]}
           tools = {[tools.Pencil]}
           toolbarPosition = "bottom"
+          defaultStrokeWidth = {30}
           
         >
         <ClearButton></ClearButton>

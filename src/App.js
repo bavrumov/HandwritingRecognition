@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        <SavableCanvas initialize={true}></SavableCanvas>
+        
         <header className="App-header">
           <p>
             Anything we want can go here. Anything about tensor, or a component that will let us draw and export an input.
@@ -25,6 +25,13 @@ class App extends Component {
           </a>
 
         </header>
+
+      {/* <div class="container-fluid">
+        <div class="row"> */}
+          <div className="col-m-6-offset-3" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
+        {/* </div>
+      </div> */}
+        
       </div>
     );
   }
