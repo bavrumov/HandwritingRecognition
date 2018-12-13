@@ -1,3 +1,5 @@
+import React, { Component } from 'react'
+
 const Ben= {
     name: 'Benjamin Kats',
     college: 'Brooklyn College Senior',
@@ -32,4 +34,34 @@ const Vlad= {
     github: 'github.com/vladborisov',
     email: 'vladborisov.vbnyc@gmail.com ',
     linkedin: ''
+}
+
+var team = [Boris, Vlad, Benji, Ben];
+
+
+export default class Carousel extends Component {
+    createCarousel = () => {
+        let elements = [];
+
+        for(let i = 0; i<team.length; i++) {
+            elements.push(
+            <div>
+                <h1>{team[i].name}</h1>
+                <h3>{team[i].github}</h3>
+                <h5>{team[i].email}</h5>
+                <br></br>
+            </div>
+            )
+        }
+
+        return elements;
+    }
+
+  render() {
+    return (
+      <div>
+        {this.createCarousel()}
+      </div>
+    )
+  }
 }
