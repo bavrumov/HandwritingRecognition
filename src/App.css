@@ -1,17 +1,30 @@
 .App {
   text-align: center;
-  background-color: #e7b76f
+  /* background-color: #e7b76f */
+  background: #E8CBC0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #636FA4, #E8CBC0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 10vmin;
-  float: left;
-  
+  /* float: left; */
+  margin-bottom: 100px;
 }
 
 .App-header {
-  background-color: #e7b76f;
+  /* background-color: #e7b76f; */
+  margin:10%;
+  background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-radius: 50px;
+  -webkit-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.55);
+  -moz-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.55);
+  box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.55);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,6 +51,13 @@
   width:40%;
   margin-left: 30%;
 }
+.lc-picker{
+  display:none;
+}
+
+.lc-drawing .toolbar-at-bottom{
+  display:none;
+}
 
 #submitButton{
   padding: .8em 2em;
@@ -47,4 +67,9 @@
 
 #learnMore{
   width:70%;
+}
+
+#about{
+  width: 70%;
+  font-size:22pt;
 }
