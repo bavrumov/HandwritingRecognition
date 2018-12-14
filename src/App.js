@@ -7,6 +7,7 @@ import * as tf from '@tensorflow/tfjs';
 import NavigationBar from './NavigationBar';
 import Carousel from './Carousel'
 import { Button } from 'reactstrap';
+import ReactTooltip from 'react-tooltip'
 
 const model = tf.loadModel('./tfjs_model/model.json');
 
@@ -18,11 +19,8 @@ class App extends Component {
     var aboutText = "Utilizing the MNIST dataset, a neural network will be trained using machine learning principles to translate handwritten text into alphanumeric digits. The project will include the use of Python libraries such as Keras and TensorFlow to create, train, and refine a model that will perform this conversion at an acceptable success rate. We will also construct a front-end application that accepts user handwriting (via trackpad/mouse) within a browser, exports and feeds it to our model, and displays the recognized character(s)."
     return (
       <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
         <NavigationBar></NavigationBar>
-        <div className="col-m-6-offset-1" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
-        <br></br>
-        <Button id="submitButton" color="success">Submit Letter</Button>
+       
       
         <header className="App-header">
           
@@ -42,11 +40,19 @@ class App extends Component {
             A good explanation on weights and bias
           </a>
 
+          
         </header>
+
+        <div className="col-m-6-offset-1" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
+          <br></br>
+          
+          <Button id="submitButton" color="success">Submit Letter</Button>
+
       <div id="carouselContainer"> <Carousel></Carousel></div>
       <br></br><br></br><br></br><br></br>
       
-      
+      <a href="#navi" ><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a>
+      <ReactTooltip />
         {/* <button onClick={() => {console.log(model)}}>click</button> */}
       </div>
     );
