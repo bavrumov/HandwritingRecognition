@@ -20,12 +20,19 @@ class App extends Component {
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <NavigationBar></NavigationBar>
+        <div className="col-m-6-offset-1" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
+        <br></br>
+        <Button id="submitButton" color="success">Submit Letter</Button>
+      
         <header className="App-header">
           
           <p id="about">
             {aboutText}
           </p>
           
+          <div id="learnMore">
+            {"If you want to make something of your own, here's where we started!"}
+          </div>
           <a
             className="App-link"
             href="https://stackoverflow.com/questions/2480650/role-of-bias-in-neural-networks/2499936#2499936"
@@ -39,9 +46,6 @@ class App extends Component {
       <div id="carouselContainer"> <Carousel></Carousel></div>
       <br></br><br></br><br></br><br></br>
       
-      <div className="col-m-6-offset-1" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
-      <br></br>
-      <Button id="submitButton" color="success">Submit Letter</Button>
       
         {/* <button onClick={() => {console.log(model)}}>click</button> */}
       </div>
