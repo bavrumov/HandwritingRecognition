@@ -26,19 +26,19 @@ export default class NavigationBar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar id="navi" className="navbar" color="dark" dark expand="md">
+        <Navbar id="top" className="navbar" color="dark" dark expand="md">
           <NavbarBrand href="/">Handwriting Recognizer</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="#about">About</NavLink>
+                <NavLink href="#Project-Summary">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#canvasContainer">App</NavLink>
+                <NavLink href="#Interactive-Canvas">App</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#carouselContainer">Team</NavLink>
+                <NavLink href="#About-Us">Team</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
