@@ -2,20 +2,22 @@
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, first run:
 
+### `npm install`
+
+to install all required packages. Then simply execute
+ 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to see our project in your browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The hand writing recognition tool is able to recognize one number/letter at a time.
+## Instructions:
+1. In the white canvas square, draw a single number or letter in the inclusive range of [0-9], [a-Z]
+2. Press Submit
+3. Leave no stray marks, press clear to wipe the canvas
 
 ## //TODO<br>
 Finish back end<br>
