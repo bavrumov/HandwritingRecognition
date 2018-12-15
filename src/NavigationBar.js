@@ -35,10 +35,10 @@ export default class NavigationBar extends React.Component {
                 <NavLink href="#about">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#carouselContainer">Team</NavLink>
+                <NavLink href="#canvasContainer">App</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#canvasContainer">App</NavLink>
+                <NavLink href="#carouselContainer">Team</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
