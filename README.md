@@ -20,6 +20,5 @@ The hand writing recognition tool is able to recognize one number/letter at a ti
 3. Leave no stray marks, press clear to wipe the canvas
 
 ## //TODO<br>
-Finish back end<br>
-Finish front end<br>
-Integrate front and back end
+Improve style
+Fix the Submit and Clear buttons
