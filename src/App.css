@@ -1,9 +1,9 @@
 .App {
-  text-align: center;
+  
   /* background-color: #e7b76f */
   background: #E8CBC0;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #636FA4, #E8CBC0);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to top, #636FA4, #E8CBC0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -18,9 +18,9 @@ background: linear-gradient(to top, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Fir
   /* background-color: #e7b76f; */
   margin:10%;
   background: #56ab2f;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: -webkit-linear-gradient(to bottom, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-align: center;
   border-radius: 50px;
   -webkit-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.55);
   -moz-box-shadow: 3px 6px 13px 0px rgba(0,0,0,0.55);
@@ -36,6 +36,12 @@ background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, 
 
 .App-link {
   color: #61dafb;
+}
+
+.centered {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes App-logo-spin {
@@ -59,10 +65,12 @@ background: linear-gradient(to bottom, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, 
   display:none;
 }
 
-#submitButton{
-  padding: .8em 2em;
+.canvasButtons{
+  padding: .5em 1em;
   font-size: 20pt;
   margin-bottom: 8em;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 #learnMore{

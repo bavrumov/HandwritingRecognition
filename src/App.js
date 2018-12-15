@@ -6,7 +6,7 @@ import SavableCanvas from './SavableCanvas';
 import * as tf from '@tensorflow/tfjs';
 import NavigationBar from './NavigationBar';
 import Carousel from './Carousel'
-import { Button } from 'reactstrap';
+//import { Button } from 'reactstrap';
 import ReactTooltip from 'react-tooltip'
 
 const model = tf.loadModel('./tfjs_model/model.json');
@@ -21,7 +21,6 @@ class App extends Component {
       <div className="App">
         <NavigationBar></NavigationBar>
        
-      
         <header className="App-header">
           
           <p id="about">
@@ -43,17 +42,18 @@ class App extends Component {
           
         </header>
 
-        <div className="col-m-6-offset-1" id="canvasContainer"><SavableCanvas initialize={true}></SavableCanvas></div>
-          <br></br>
+        <div className="col-m-6-offset-1" id="canvasContainer">
+        <SavableCanvas initialize={true}></SavableCanvas></div>
+        
+        <div className="centered">
+          <br><a href="#navi"><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a></br>
           
-          <Button id="submitButton" color="success">Submit Letter</Button>
-
-      <div id="carouselContainer"> <Carousel></Carousel></div>
-      <br></br><br></br><br></br><br></br>
-      
-      <a href="#navi" ><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a>
-      <ReactTooltip />
-        {/* <button onClick={() => {console.log(model)}}>click</button> */}
+          <div id="carouselContainer"><Carousel></Carousel></div>
+          <br></br><br></br><br></br><br></br>
+          
+          <a href="#navi"><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a>
+          <ReactTooltip />
+        </div>
       </div>
     );
   }
