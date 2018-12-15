@@ -45,7 +45,7 @@ export default class Carousel extends Component {
         for(let i = 0; i<team.length; i++) {
           
              elements.push(
-             <Col sm={12} md={6} lg={3} key={i}>
+             <Col sm={12} md={6} lg={6} key={i}>
                 <div style={{width:"100%"}}><img
                 src={pic}
                 alt={team[i].name}
@@ -53,7 +53,7 @@ export default class Carousel extends Component {
                 />
                 </div>
                  <h1>{team[i].name}</h1>
-                 <h3><a className="App-link" href={"https://www."+team[i].github}>{team[i].github}</a></h3>
+                 <h3><a className="App-link" href={"https://"+team[i].github}>{team[i].github}</a></h3>
                  <h5><a href={"https://www."+team[i].linkedin} style={{color:"goldenrod"}}>{team[i].linkedin}</a></h5>
               </Col>
              )
