@@ -6,7 +6,7 @@ import SavableCanvas from './SavableCanvas';
 import * as tf from '@tensorflow/tfjs';
 import NavigationBar from './NavigationBar';
 import Carousel from './Carousel'
-//import { Button } from 'reactstrap';
+// import { Col } from 'reactstrap';
 import ReactTooltip from 'react-tooltip'
 
 const model = tf.loadModel('./tfjs_model/model.json');
@@ -26,10 +26,12 @@ class App extends Component {
           <p id="about">
             {aboutText}
           </p>
+          <br></br>
           
           <div id="learnMore">
             {"If you want to make something of your own, here's where we started!"}
           </div>
+
           <a
             className="App-link"
             href="https://stackoverflow.com/questions/2480650/role-of-bias-in-neural-networks/2499936#2499936"
@@ -39,20 +41,27 @@ class App extends Component {
             A good explanation on weights and bias
           </a>
 
-          
         </header>
 
         <div className="col-m-6-offset-1" id="canvasContainer">
-        <SavableCanvas initialize={true}></SavableCanvas></div>
+          <SavableCanvas initialize={true}></SavableCanvas>
+        </div>
         
         <div className="centered">
-          <br><a href="#navi"><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a></br>
-          
-          <div id="carouselContainer"><Carousel></Carousel></div>
-          <br></br><br></br><br></br><br></br>
-          
-          <a href="#navi"><img src={logo} data-tip="Back to top" className="App-logo" alt="logo" /></a>
+
           <ReactTooltip />
+          <a href="#navi">
+            <img src={logo} data-tip="Back to top" className="App-logo" alt="logo" />
+          </a>
+          
+          <div id="carouselContainer">
+            <Carousel></Carousel>
+          </div>
+          
+          <a href="#navi">
+            <img src={logo} data-tip="Back to top" className="App-logo" alt="logo" />
+          </a>
+          
         </div>
       </div>
     );
