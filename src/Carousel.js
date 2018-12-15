@@ -6,7 +6,6 @@ import {Row, Col} from 'reactstrap'
 const Ben= {
     name: 'Benjamin Kats',
     college: 'Brooklyn College Senior',
-    phone: '347-601-5317',
     github: 'github.com/benkats',
     email: 'katsbenjamin@gmail.com',
     linkedin: 'linkedin.com/in/benkats'
@@ -15,8 +14,8 @@ const Ben= {
 const Benji= {
     name: 'Benjamin Karasik',
     college: 'Brooklyn College Senior',
-    phone: '201-912-7821',
-    github: 'github.com/benjaminkarasik28',
+    github: 'jpmorgan.com',
+    // github: 'github.com/benjaminkarasik28',
     email: 'Karasik.benjamin28@gmail.com ',
     linkedin: 'linkedin.com/in/benjamin-k-798a0687'
 }
@@ -24,7 +23,6 @@ const Benji= {
 const Boris= {
     name: 'Boris Avrumov',
     college: 'Brooklyn College Senior',
-    phone: '347-248-1966',
     github: 'bavrumov.github.io',
     email: 'bavrumov@hotmail.com ',
     linkedin: 'linkedin.com/in/bavrumov'
@@ -33,7 +31,6 @@ const Boris= {
 const Vlad= {
     name: 'Vlad Borisov',
     college: 'Brooklyn College Senior',
-    phone: '347-751-4955',
     github: 'github.com/vladborisov',
     email: 'vladborisov.vbnyc@gmail.com ',
     linkedin: 'vladborisov.com'
@@ -48,7 +45,7 @@ export default class Carousel extends Component {
         for(let i = 0; i<team.length; i++) {
           
              elements.push(
-             <Col sm={12} md={6} lg={3}>
+             <Col sm={12} md={6} lg={3} key={i}>
                 <div style={{width:"100%"}}><img
                 src={pic}
                 alt={team[i].name}
@@ -56,7 +53,7 @@ export default class Carousel extends Component {
                 />
                 </div>
                  <h1>{team[i].name}</h1>
-                 <h3><a href={"https://www."+team[i].github}>{team[i].github}</a></h3>
+                 <h3><a className="App-link" href={"https://www."+team[i].github}>{team[i].github}</a></h3>
                  <h5><a href={"https://www."+team[i].linkedin} style={{color:"goldenrod"}}>{team[i].linkedin}</a></h5>
               </Col>
              )
@@ -64,9 +61,7 @@ export default class Carousel extends Component {
         return elements;
     }
   
-    //items = this.createCarousel();
   render() {
-    //console.log(items);
     return (
       <div className="container">
         <Row>
