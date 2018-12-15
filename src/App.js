@@ -6,24 +6,32 @@ import SavableCanvas from './SavableCanvas';
 import * as tf from '@tensorflow/tfjs';
 import NavigationBar from './NavigationBar';
 import Carousel from './Carousel'
-// import { Col } from 'reactstrap';
 import ReactTooltip from 'react-tooltip'
+//import jsonModel from './tfjs_model/model.json'
 
-const model = tf.loadModel('./tfjs_model/model.json');
+//const hostIP = "'192.168.1.5:3000/src/tfjs_model/model.json'"
+//const model = tf.loadModel('0.0.0.0:8000/tfjs_model/model.json');
+
+async function modelLoader() {
+  const model = await tf.loadModel('./tfjs_model/model.json');
+  console.log(model);
+}
 
 class App extends Component {
-  
+
   render() {
     console.log(tf.version);
-    console.log(model);
+    modelLoader();
+    
     var aboutText = "Utilizing the MNIST dataset, a neural network will be trained using machine learning principles to translate handwritten text into alphanumeric digits. The project will include the use of Python libraries such as Keras and TensorFlow to create, train, and refine a model that will perform this conversion at an acceptable success rate. We will also construct a front-end application that accepts user handwriting (via trackpad/mouse) within a browser, exports and feeds it to our model, and displays the recognized character(s)."
     return (
       <div className="App">
         <NavigationBar></NavigationBar>
-       
+        
         <header className="App-header">
-          
-          <p id="about">
+          <h1>About Our Project</h1>
+          <hr />
+          <p id="Project-Summary">
             {aboutText}
           </p>
           <br></br>
@@ -43,23 +51,23 @@ class App extends Component {
 
         </header>
 
-        <div className="col-m-6-offset-1" id="canvasContainer">
+        <div className="col-m-6-offset-1" id="Interactive-Canvas">
           <SavableCanvas initialize={true}></SavableCanvas>
         </div>
         
         <div className="centered">
 
           <ReactTooltip />
-          <a href="#navi">
+          <a href="#top">
             <img src={logo} data-tip="Back to top" className="App-logo" alt="logo" />
           </a>
           
-          <div id="carouselContainer">
+          <div id="About-Us">
             <Carousel></Carousel>
           </div>
           
-          <a href="#navi">
-            <img src={logo} data-tip="Back to top" className="App-logo" alt="logo" />
+          <a href="#top">
+            <img src={logo} data-tip={"Back to top"} className="App-logo" alt="logo" />
           </a>
           
         </div>
