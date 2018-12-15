@@ -33,6 +33,15 @@ class App extends Component {
           <hr />
           <p id="Project-Summary">
             {aboutText}
+            <br></br>
+            <a
+            className="App-link"
+            href="https://github.com/bavrumov/HandwritingRecognition"
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+              Check out our GitHub repository
+            </a>
           </p>
           <br></br>
           
