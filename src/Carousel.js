@@ -14,8 +14,7 @@ const Ben= {
 const Benji= {
     name: 'Benjamin Karasik',
     college: 'Brooklyn College Senior',
-    github: 'jpmorgan.com',
-    // github: 'github.com/benjaminkarasik28',
+    github: 'youtube.com/channel/UCdXKT1OFsFNYhpa-kwLKoAA/',
     email: 'Karasik.benjamin28@gmail.com ',
     linkedin: 'linkedin.com/in/benjamin-k-798a0687'
 }
