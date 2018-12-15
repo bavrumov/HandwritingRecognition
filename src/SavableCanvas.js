@@ -28,7 +28,7 @@ export class SavableCanvas extends Component {
         >
         <ClearButton></ClearButton>
         </LiterallyCanvasReactComponent>
-        
+
       </div>
     )
   }

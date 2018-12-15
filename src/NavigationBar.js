@@ -26,7 +26,7 @@ export default class NavigationBar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar className="navbar" color="dark" dark expand="md">
+        <Navbar id="navi" className="navbar" color="dark" dark expand="md">
           <NavbarBrand href="/">Handwriting Recognizer</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
