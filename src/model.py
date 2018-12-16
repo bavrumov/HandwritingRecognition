@@ -1,4 +1,5 @@
 import tensorflow as tf
+import tensorflowjs as tfjs
 import keras
 import keras.backend as kbe
 from keras.models import load_model
@@ -97,6 +98,7 @@ class Model(object):
 
     def save(self):
         self.kerasModel.save(('digitizer.h5'))
+        tfjs.converters.save_keras_model(self.kerasModel, './tfjs_model')
 
     def load(self):
         self.kerasModel = load_model('digitizer.h5')
