@@ -23,9 +23,11 @@ export class SavableCanvas extends Component {
   }
   
   clear = () => {
-    //let clr = document.getElementsByClassName("lc-clear");
-    console.log("This is our clear button: Right now it prints out the imported model")
-    console.log(models[0]);
+    let clr = document.getElementsByClassName("lc-clear")[0];
+    console.log("This is our clear button: Right now it prints out the delete button");
+    clr.dispatchEvent(new Event('onClick'));
+    //console.log(clr);
+    //console.log(models[0]);
   }
 
   submit = () => {
@@ -38,12 +40,12 @@ export class SavableCanvas extends Component {
   }
   
   componentDidMount() {
-    document.getElementsByClassName("with-gui")[0].style.left=0;
+    document.getElementsByClassName("with-gui")[0].style.left = 0;
   }
 
   
   render() {
-    modelLoader();
+    //modelLoader();
     
     //console.log(this.props.initialize);
     var size = {width: "420", height: "420"};

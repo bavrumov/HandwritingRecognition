@@ -54,7 +54,7 @@ export default class Carousel extends Component {
                 <div style={{width:"100%"}}><img
                 src={team[i].pic}
                 alt={team[i].name}
-                width="80%"
+                width="75%"
                 />
                 </div>
                  <h1>{team[i].name}</h1>
