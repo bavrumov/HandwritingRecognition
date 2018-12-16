@@ -11,7 +11,9 @@ to install all required packages. Then simply execute
 ### `npm start`
 
 To run the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to see our project in your browser.
+Open [http://localhost:3000](http://localhost:3000) to see our project in your browser.<br>
+Note: In order for the Keras model to be imported correctly, run the following in the project directory as well:<br>
+`python3 -m http.server` This will host the file structure on port 8000, allowing the app to make requests.<br>
 
 The hand writing recognition tool is able to recognize one number/letter at a time.
 ## Instructions:

@@ -3,7 +3,7 @@ import logo from './tf.png';
 import './App.css';
 import './lit.css';
 import SavableCanvas from './SavableCanvas';
-import * as tf from '@tensorflow/tfjs';
+//import * as tf from '@tensorflow/tfjs';
 import NavigationBar from './NavigationBar';
 import Carousel from './Carousel'
 import ReactTooltip from 'react-tooltip'
@@ -12,16 +12,15 @@ import ReactTooltip from 'react-tooltip'
 //const hostIP = "'192.168.1.5:3000/src/tfjs_model/model.json'"
 //const model = tf.loadModel('0.0.0.0:8000/tfjs_model/model.json');
 
-async function modelLoader() {
-  const model = await tf.loadModel('./tfjs_model/model.json');
-  console.log(model);
-}
+
+// fetch('http://0.0.0.0:3000/src/tfjs_model/model.json')
+//     .then(res => res.json())
+//     .then(json => console.log(json));
 
 class App extends Component {
 
   render() {
-    console.log(tf.version);
-    modelLoader();
+    //console.log(tf.version);
     
     var aboutText = "Utilizing the MNIST dataset, a neural network will be trained using machine learning principles to translate handwritten text into alphanumeric digits. The project will include the use of Python libraries such as Keras and TensorFlow to create, train, and refine a model that will perform this conversion at an acceptable success rate. We will also construct a front-end application that accepts user handwriting (via trackpad/mouse) within a browser, exports and feeds it to our model, and displays the recognized character(s)."
     return (
