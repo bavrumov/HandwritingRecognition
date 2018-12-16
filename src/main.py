@@ -54,6 +54,9 @@ os.system('gzip inputdata-images-idx3-ubyte')
 
 
 mydigits = Model()
-mydigits.load()
-mydigits.predict()
+mydigits.build
+mydigits.train(1)  # EPOCH NUM is param variable
+mydigits.save
+
+
 
