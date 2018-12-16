@@ -67,7 +67,7 @@ class Model(object):
                       )
         self.kerasModel.summary()
 
-    def train(numOfEpochs,self):
+    def train(self, numOfEpochs):
         training_images, training_labels = loadlocal_mnist(
             images_path = './data/emnist-byclass-train-images-idx3-ubyte',
             labels_path = './data/emnist-byclass-train-labels-idx1-ubyte')
@@ -79,7 +79,7 @@ class Model(object):
         training_images = numpy.reshape(training_images, (training_images.shape[0], gridSize, gridSize))
         training_images = keras.utils.normalize(training_images, axis=1)
 
-        self.fit(training_images, training_labels, epochs=numOfEpochs) # Arbitrary Epoch Cutoff
+        self.kerasModel.fit(training_images, training_labels, epochs=numOfEpochs) # Arbitrary Epoch Cutoff
 
     def test(self):
         testing_images, testing_labels = loadlocal_mnist(
