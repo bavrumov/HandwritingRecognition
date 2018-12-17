@@ -23,11 +23,19 @@ export class SavableCanvas extends Component {
   }
   
   clear = () => {
-    let clr = document.getElementsByClassName("lc-clear")[0];
-    console.log("This is our clear button: Right now it prints out the delete button");
-    clr.dispatchEvent(new Event('onClick'));
+    //let clr = document.getElementsByClassName("lc-clear");
+    // let clr = document.getElementsByTagName("canvas");
+    
+    // for (let i = 0; i<clr.length; i++){
+    //   console.log(clr[i].style.cssText);
+    //   clr[i].style.color="white";
+    //   //console.log(clr[i]);
+    // }
+    // console.log("This is our clear button: Right now it prints out the delete button");
+    // //clr.dispatchEvent(new Event('onClick'));
     //console.log(clr);
     //console.log(models[0]);
+    window.location.reload();
   }
 
   submit = () => {
@@ -47,7 +55,6 @@ export class SavableCanvas extends Component {
   render() {
     //modelLoader();
     
-    //console.log(this.props.initialize);
     var size = {width: "420", height: "420"};
     LC = 
     <LiterallyCanvasReactComponent
