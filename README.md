@@ -12,8 +12,9 @@ to install all required packages. Then simply execute
 
 To run the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to see our project in your browser.<br>
-Note: In order for the Keras model to be imported correctly, run the following in the project directory as well:<br>
-`python3 -m http.server` This will host the file structure on port 8000, allowing the app to make requests.<br>
+Next, still in the project directory, run:<br>
+`FLASK_APP=./src/App.py; flask run;`<br>
+This will host the Flask server on port 5000, allowing the web application to make API calls.<br>
 
 The hand writing recognition tool is able to recognize one number/letter at a time.
 ## Instructions:
@@ -22,5 +23,5 @@ The hand writing recognition tool is able to recognize one number/letter at a ti
 3. Leave no stray marks, press clear to wipe the canvas
 
 ## //TODO<br>
-Improve style<br>
-Fix the Submit and Clear buttons
+Print the results of submit on the page<br>
+Add behind-the-scenes-images on the model's training data
