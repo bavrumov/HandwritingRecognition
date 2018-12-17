@@ -28,3 +28,4 @@ package-lock.json
 /__pychache__
 output.jpg
 src/__pycache__/
+/data/input.png
