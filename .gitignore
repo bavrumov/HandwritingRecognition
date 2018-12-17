@@ -27,3 +27,4 @@ package-lock.json
 /.idea
 /__pychache__
 output.jpg
+src/__pycache__/
