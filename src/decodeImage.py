@@ -17,4 +17,4 @@ def decodeb64(str):
     fh = open("testPic.jpg", "wb")
     fh.write(base64.b64decode(img_data))
     fh.close()
-    return "testPic.jpg saved successfully";
+    return "testPic.jpg saved successfully"
