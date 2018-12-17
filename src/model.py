@@ -1,5 +1,5 @@
 import tensorflow as tf
-import tensorflowjs as tfjs
+#import tensorflowjs as tfjs
 import keras
 import keras.backend as kbe
 from keras.models import load_model
@@ -21,26 +21,20 @@ class Model(object):
                    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     # GRAPHING TO LOOK AT FULL CHANNEL SET
-    def plotter(self, i, predictions_arr, correct_label, img):
-        predictions_arr, correct_label, img = predictions_arr[i], correct_label[i], img[i]
+    def plotter(self, predictions_arr, img):
         plot.grid(False)
         plot.xticks([])
         plot.yticks([])
 
         plot.imshow(img) #cmap=plot.cm.binary
         predicted_label = numpy.argmax(predictions_arr)
-        if predicted_label == correct_label:
-            color = 'green'
-        else:
-            color = 'red'
+        color = 'blue'
 
         plot.xlabel("{} {:2.0f}% ({})".format(self.label_names[predicted_label],
-                                              100 * numpy.max(predictions_arr),
-                                              self.label_names[correct_label]),
+                                              100 * numpy.max(predictions_arr)),
                     color=color)
 
-    def plot_value_array(i, predictions_arr, correct_label):
-        predictions_arr, correct_label = predictions_arr[i], correct_label[i]
+    def plot_value_array(predictions_arr):
         plot.grid(False)
         plot.xticks([])
         plot.yticks([])
@@ -49,8 +43,8 @@ class Model(object):
         plot.ylim([0, 1])
         predicted_label = numpy.argmax(predictions_arr)
 
-        thisplot[predicted_label].set_color('red')
-        thisplot[correct_label].set_color('green')
+        thisplot[predicted_label].set_color('blue')
+        #thisplot[correct_label].set_color('green')
 
     def build(self):
         self.kerasModel.add(keras.layers.Flatten(input_shape=(28, 28)))  # Brings our 28x28 array back into a flat 1d aray
@@ -124,6 +118,10 @@ class Model(object):
         #predictions = self.kerasModel.predict(predict_image) #this will work on user input data yay
 
         predictions = self.kerasModel.predict([predict_image])
+
+        self.plotter(predictions, predict_image)
+        self.plot_value_array(predictions, predict_image)
+        plot.savefig('testMaster.png')
 
         print(self.label_names[numpy.argmax(predictions)])
         print(predictions)
