@@ -60,9 +60,23 @@ export class SavableCanvas extends Component {
     //console.log(document.getElementsByTagName("canvas")[0].toDataURL("image/png"));
     let image = document.getElementsByTagName("canvas")[1].toDataURL("image/png");
     //console.log(image);
-    fetch('http://0.0.0.0:5000/random')
-       .then(res => res.json())
-       .then(json => document.getElementById("output").innerHTML=json);
+    //fetch(`http://0.0.0.0:5000/test/${image}`)
+      //  .then(res => res.json())
+      //  .then(json => document.getElementById("output").innerHTML=json);
+
+      fetch("http://0.0.0.0:5000/recieve", {
+        method: "post",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "img": image
+        })
+      })
+      .then( (response) => { 
+        document.getElementById("output").innerHTML=response;
+      });
   }
   
   componentDidMount() {
