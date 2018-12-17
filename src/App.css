@@ -89,3 +89,8 @@
 .lc-drawing{
   left: 0;
 }
+
+#test{
+  text-align: center;
+  margin-bottom: 4em;
+}
