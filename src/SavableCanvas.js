@@ -10,6 +10,7 @@ var LC;
 //An array that should be of size 1, this is a hack to store the imported model globally
 var models = [];
 
+// eslint-disable-next-line
 async function modelLoader() {
   const model = await tf.loadModel('http://0.0.0.0:8000/src/tfjs_model/model.json');
   //const model = await tf.loadModel('https://github.com/bavrumov/HandwritingRecognition/blob/master/src/tfjs_model/model.json');
