@@ -39,8 +39,11 @@ export class SavableCanvas extends Component {
   }
 
   submit = () => {
-    console.log("TensorFlow is going to take the following canvas as a parameter when I understand how:");
-    console.log(document.getElementById("test").firstChild.firstChild.childNodes[1]);
+    console.log("Here is the image URL:");
+    //console.log(document.getElementById("test").firstChild.firstChild.childNodes[1]);
+    //console.log(document.getElementsByTagName("canvas")[0].toDataURL("image/png"));
+    let image = document.getElementsByTagName("canvas")[1].toDataURL("image/png");
+    console.log(image);
     //let canvas = tf.fromPixels(document.getElementById("test").firstChild.firstChild.childNodes[1]);
     //console.log(document.getElementsByClassName("lc-drawing")[0]);
     //console.log("PLEASE WORK: ")
