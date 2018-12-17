@@ -25,3 +25,5 @@ yarn-error.log*
 package-lock.json
 4900.code-workspace
 /.idea
+/__pychache__
+output.jpg
