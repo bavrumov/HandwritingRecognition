@@ -125,7 +125,7 @@ class Model(object):
 
         print(self.label_names[numpy.argmax(predictions)])
         print(predictions)
-
+        return self.label_names[numpy.argmax(predictions)]
 
 
 
