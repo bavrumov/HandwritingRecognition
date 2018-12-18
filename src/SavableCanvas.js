@@ -70,7 +70,8 @@ export class SavableCanvas extends Component {
       //  .then(res => res.json())
       //  .then(json => document.getElementById("output").innerHTML=json);
 
-      fetch("http://0.0.0.0:5000/recieve", {
+      //fetch("http://0.0.0.0:5000/recieve", {
+        fetch("http://af8620ae.ngrok.io/recieve", {
         method: "post",
         headers: {
           'Accept': 'application/json',
@@ -81,6 +82,7 @@ export class SavableCanvas extends Component {
         })
       })
       .then( (response) => { 
+        console.log(response);
         document.getElementById("output").innerHTML=response;
       });
   }
