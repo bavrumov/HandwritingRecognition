@@ -12,6 +12,7 @@ from mlxtend.data import loadlocal_mnist
 import random
 import struct
 import os
+from PIL import Image
 
 
 
@@ -23,30 +24,66 @@ class Model(object):
                    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     # GRAPHING TO LOOK AT FULL CHANNEL SET
-    def plotter(self, predictions_arr, img):
-        #plot.grid(True)
+    # def plotter(self, predictions_arr, img):
+    #     plot.grid(True)
+    #     plot.xticks([])
+    #     plot.yticks([])
+    #     plot.imshow(img) #cmap=plot.cm.binary
+    #     predicted_label = numpy.argmax(predictions_arr)
+    #     color = 'blue'
+    #
+    #     plot.xlabel("{} {:2.0f}% ({})".format(self.label_names[predicted_label],
+    #                                           100 * numpy.max(predictions_arr),
+    #                                           self.label_names[predicted_label]),
+    #                 color=color)
+    #
+    # def plot_value_array(self, predictions_arr):
+    #     plot.grid(False)
+    #     plot.xticks([])
+    #     plot.yticks([])
+    #
+    #     thisplot = plot.bar(range(62), predictions_arr, color="#777777")
+    #     plot.ylim([0, 1])
+    #     predicted_label = numpy.argmax(predictions_arr)
+    #
+    #     thisplot[predicted_label].set_color('blue')
+    #     #thisplot[correct_label].set_color('green')
+
+    def plotter(self, i, predictions_array, img):
+        # plot.figure(figsize=(50, 10))
+        # plot.autoscale(False)
+        # plot.rcParams["figure.figsize"] = [16, 9]
+        predictions_array, img = predictions_array[i], img[i]
+
+        plot.grid(True)
         plot.xticks([])
         plot.yticks([])
-        plot.imshow(img) #cmap=plot.cm.binary
-        predicted_label = numpy.argmax(predictions_arr)
-        color = 'blue'
 
-        plot.xlabel("{} {:2.0f}% ({})".format(self.label_names[predicted_label],
-                                              100 * numpy.max(predictions_arr),
-                                              self.label_names[predicted_label]),
-                    color=color)
+        plot.imshow(img) #cmap=plot.cm.binary)
 
-    def plot_value_array(self, predictions_arr):
-        plot.grid(False)
+        # plot.figure(figsize=(50, 10))
+        predicted_label = numpy.argmax(predictions_array)
+
+        color = "green"
+
+        plot.xlabel("{:2.0f}% ({})".format(100 * numpy.max(predictions_array),
+                                           self.label_names[predicted_label]),
+                            color=color)
+
+    def plot_value_array(self, i, predictions_array):
+        plot.figure(figsize=(20, 10))
+        plot.tight_layout()
+        predictions_array = predictions_array[i]
+        plot.grid(True)
         plot.xticks([])
+        _ = plot.xticks(range(62), self.label_names)
         plot.yticks([])
-
-        thisplot = plot.bar(range(62), predictions_arr, color="#777777")
+        thisplot = plot.bar(range(62), predictions_array, color="#777777")
         plot.ylim([0, 1])
-        predicted_label = numpy.argmax(predictions_arr)
+        predicted_label = numpy.argmax(predictions_array)
 
         thisplot[predicted_label].set_color('blue')
-        #thisplot[correct_label].set_color('green')
+
 
     def build(self):
         self.kerasModel.add(keras.layers.Flatten(input_shape=(28, 28)))  # Brings our 28x28 array back into a flat 1d aray
@@ -120,13 +157,41 @@ class Model(object):
 
         predict_image = keras.utils.normalize(predict_image, axis=1)
 
-        predictions = self.kerasModel.predict(predict_image)
-        self.plotter(predictions, predict_image)
-        self.plot_value_array(predictions)
+        # predictions = self.kerasModel.predict(predict_image)
 
-        plot.savefig('testMaster.png')
 
-        print(self.label_names[numpy.argmax(predictions)])
+
+        img = predict_image[0]
+
+        print(img.shape)
+
+        img = (numpy.expand_dims(img, 0))
+
+        print(img.shape)
+
+        predictions = self.kerasModel.predict(img)
+
+        print(predictions)
+
+        print(predict_image)
+        #
+        # for i in range(1):
+        #     plot.subplot(1, 2 * 1, 2 * i + 1)
+        #     self.plotter(i, predictions, predict_image)
+        #     plot.subplot(1, 2 * 1, 2 * i + 2)
+        #     self.plot_value_array(i, predictions)
+
+        # self.plotter(0, predictions, predict_image)
+        # self.plot_value_array(0, predictions)
+
+        self.plotter(0, predictions, predict_image)
+        plot.savefig('justPicture.png')
+
+        self.plot_value_array(0, predictions)
+        plot.savefig('justArray.png')
+
+
+        # print(self.label_names[numpy.argmax(predictions)])
         print(predictions)
         return self.label_names[numpy.argmax(predictions)]
 
