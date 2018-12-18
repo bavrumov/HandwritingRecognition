@@ -37,11 +37,12 @@ def reciever():
       img_data = data['img']
     successMessage = decodeb64(img_data)
     print(successMessage+"Resizing now:")
-    #subprocess.call("./src/resize-script.sh", shell=True)
+    subprocess.call("./src/resize-script.sh", shell=True)
     print("Resize complete.")
     #return imageManipAndPredict
-    return "f"
-    
+    data = {'val': 'test'}
+    return jsonify(data)
+    #return
       
 
 def decodeb64(str):
