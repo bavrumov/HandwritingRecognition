@@ -54,6 +54,12 @@ export class SavableCanvas extends Component {
     window.location.reload();
   }
 
+  submit2 = () => {
+    fetch(`http://0.0.0.0:5000/random`)
+      .then(res => res.json())
+      .then(json => document.getElementById("output").innerHTML=json);
+  }
+
   submit = () => {
     console.log("Here is the image URL:");
     //console.log(document.getElementById("test").firstChild.firstChild.childNodes[1]);
