@@ -24,19 +24,19 @@ class Model(object):
 
     # GRAPHING TO LOOK AT FULL CHANNEL SET
     def plotter(self, predictions_arr, img):
-        plot.grid(False)
+        #plot.grid(True)
         plot.xticks([])
         plot.yticks([])
-
         plot.imshow(img) #cmap=plot.cm.binary
         predicted_label = numpy.argmax(predictions_arr)
         color = 'blue'
 
         plot.xlabel("{} {:2.0f}% ({})".format(self.label_names[predicted_label],
-                                              100 * numpy.max(predictions_arr)),
+                                              100 * numpy.max(predictions_arr),
+                                              self.label_names[predicted_label]),
                     color=color)
 
-    def plot_value_array(predictions_arr):
+    def plot_value_array(self, predictions_arr):
         plot.grid(False)
         plot.xticks([])
         plot.yticks([])
@@ -94,7 +94,7 @@ class Model(object):
 
     def save(self):
         self.kerasModel.save(('digitizer.h5'))
-        tfjs.converters.save_keras_model(self.kerasModel, './tfjs_model')
+        #tfjs.converters.save_keras_model(self.kerasModel, './tfjs_model')
 
     def load(self):
         THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -120,12 +120,10 @@ class Model(object):
 
         predict_image = keras.utils.normalize(predict_image, axis=1)
 
-        #predictions = self.kerasModel.predict(predict_image) #this will work on user input data yay
-
-        predictions = self.kerasModel.predict([predict_image])
-
+        predictions = self.kerasModel.predict(predict_image)
         self.plotter(predictions, predict_image)
-        self.plot_value_array(predictions, predict_image)
+        self.plot_value_array(predictions)
+
         plot.savefig('testMaster.png')
 
         print(self.label_names[numpy.argmax(predictions)])
