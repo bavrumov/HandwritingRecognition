@@ -81,9 +81,10 @@ export class SavableCanvas extends Component {
           "img": image
         })
       })
-      .then( (response) => { 
-        console.log(response);
-        document.getElementById("output").innerHTML=response;
+      .then(res => res.json())
+      .then( (json) => { 
+        console.log(json);
+        document.getElementById("output").innerHTML=json.getJSONObject("val");
       });
   }
   
