@@ -10,6 +10,7 @@ from PIL import Image
 from array import *
 from .model import Model
 
+
 @app.route("/")
 def main():
     return "Literally nothing"
@@ -27,6 +28,7 @@ def printparam(par):
 # Endpoint for POST request from React app
 @app.route('/recieve', methods=['POST'])
 def reciever():
+
     data = request.get_json()
 
     # Handles bad requests / empty data
@@ -39,10 +41,11 @@ def reciever():
     print(successMessage+"Resizing now:")
     subprocess.call("./src/resize-script.sh", shell=True)
     print("Resize complete.")
-    #return imageManipAndPredict
-    data = {'val': 'test'}
-    return jsonify(data)
-    #return
+
+
+    
+    predictChar = imageManipAndPredict()
+    return jsonify(predictChar)
       
 
 def decodeb64(str):

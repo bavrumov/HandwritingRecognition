@@ -11,6 +11,8 @@ import math
 from mlxtend.data import loadlocal_mnist
 import random
 import struct
+import os
+
 
 
 class Model(object):
@@ -66,7 +68,7 @@ class Model(object):
             images_path = './data/emnist-byclass-train-images-idx3-ubyte',
             labels_path = './data/emnist-byclass-train-labels-idx1-ubyte')
 
-        numpy.set_printoptions(linewidth=1800)
+        #numpy.set_printoptions(linewidth=1800)
         gridSize = int (math.sqrt(training_images.shape[1]))
 
         training_images = numpy.expand_dims(training_images, axis=2)
@@ -95,7 +97,10 @@ class Model(object):
         tfjs.converters.save_keras_model(self.kerasModel, './tfjs_model')
 
     def load(self):
-        self.kerasModel = load_model('digitizer.h5')
+        THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+        my_file = os.path.join(THIS_FOLDER, 'digitizer.h5')
+
+        self.kerasModel = load_model(my_file)
         self.kerasModel.summary()
 
     def predict(self):

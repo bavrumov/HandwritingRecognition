@@ -84,7 +84,7 @@ export class SavableCanvas extends Component {
       .then(res => res.json())
       .then( (json) => { 
         console.log(json);
-        document.getElementById("output").innerHTML=json.getJSONObject("val");
+        document.getElementById("output").innerHTML=JSON.stringify(json)
       });
   }
   
