@@ -63,15 +63,16 @@ export class SavableCanvas extends Component {
   submit = () => {
     console.log("Here is the image URL:");
     //console.log(document.getElementById("test").firstChild.firstChild.childNodes[1]);
-    //console.log(document.getElementsByTagName("canvas")[0].toDataURL("image/png"));
+    //console.log(document.getElementsByTagName("canvas")[1].toDataURL("image/png"));
     let image = document.getElementsByTagName("canvas")[1].toDataURL("image/png");
+    //console.log(image);
     //console.log(image);
     //fetch(`http://0.0.0.0:5000/test/${image}`)
       //  .then(res => res.json())
       //  .then(json => document.getElementById("output").innerHTML=json);
 
-      //fetch("http://0.0.0.0:5000/recieve", {
-        fetch("http://af8620ae.ngrok.io/recieve", {
+      fetch("http://0.0.0.0:5000/recieve", {
+      //fetch("http://57832447.ngrok.io/recieve", {
         method: "post",
         headers: {
           'Accept': 'application/json',
@@ -83,8 +84,9 @@ export class SavableCanvas extends Component {
       })
       .then(res => res.json())
       .then( (json) => { 
-        console.log(json);
-        document.getElementById("output").innerHTML=JSON.stringify(json)
+        console.log(JSON.stringify(json));
+        document.getElementById("output").innerHTML="Our model thinks you wrote: <br>"+JSON.stringify(json);
+        
       });
   }
   

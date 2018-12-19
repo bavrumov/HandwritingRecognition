@@ -1,5 +1,4 @@
 import tensorflow as tf
-#import tensorflowjs as tfjs
 import keras
 import keras.backend as kbe
 from keras.models import load_model
@@ -139,6 +138,8 @@ class Model(object):
 
         self.kerasModel = load_model(my_file)
         self.kerasModel.summary()
+        # self.kerasModel = load_model('digitizer.h5')
+        # self.kerasModel.summary()
 
     def predict(self):
         with open('inputdata-images-idx3-ubyte', 'rb') as imgpath:
