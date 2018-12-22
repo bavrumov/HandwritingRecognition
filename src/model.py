@@ -1,4 +1,8 @@
+import itertools
+from collections import OrderedDict
+
 import tensorflow as tf
+#import tensorflowjs as tfjs
 import keras
 import keras.backend as kbe
 from keras.models import load_model
@@ -137,9 +141,7 @@ class Model(object):
         my_file = os.path.join(THIS_FOLDER, 'digitizer.h5')
 
         self.kerasModel = load_model(my_file)
-        self.kerasModel.summary()
-        # self.kerasModel = load_model('digitizer.h5')
-        # self.kerasModel.summary()
+        #self.kerasModel.summary()
 
     def predict(self):
         with open('inputdata-images-idx3-ubyte', 'rb') as imgpath:
@@ -196,10 +198,106 @@ class Model(object):
         print(predictions)
         return self.label_names[numpy.argmax(predictions)]
 
+    def test_predicts_metrics(self):
+        testing_images, testing_labels = loadlocal_mnist(
+            images_path='./data/emnist-byclass-test-images-idx3-ubyte',
+            labels_path='./data/emnist-byclass-test-labels-idx1-ubyte')
+
+        with open('./data/emnist-byclass-test-images-idx3-ubyte', 'rb') as imgpath:
+            magic, num, rows, cols = struct.unpack(">IIII",
+                                                   imgpath.read(16))
+            images = numpy.fromfile(imgpath,
+                                 dtype=numpy.uint8).reshape(116323, 784)
+            testing_images = images
+
+        gridSize = int(math.sqrt(testing_images.shape[1]))
+
+        testing_images = numpy.expand_dims(testing_images, axis=2)
+
+        testing_images = numpy.reshape(testing_images, (testing_images.shape[0], gridSize, gridSize))
+
+        testing_images = keras.utils.normalize(testing_images, axis=1)
+
+        predictions = self.kerasModel.predict(testing_images)
+
+        totalimgs = 116323
+        numcorrect = 0
+        wrong_guesses = [[0 for x in range(62)] for y in range(62)]
+        wrong_sums = [0 for x in range(62)]
+
+        # COUNTING WRONG GUESSES FOR EACH CHAR
+        for i in range (totalimgs):
+            guessed_label = numpy.argmax(predictions[i])
+            if str(self.label_names[guessed_label]) == str(self.label_names[testing_labels[i]]):
+                numcorrect = numcorrect + 1
+            else:
+                wrong_guesses[testing_labels[i]][guessed_label] = wrong_guesses[testing_labels[i]][guessed_label] + 1
+                wrong_sums[testing_labels[i]] = wrong_sums[testing_labels[i]] + 1
+        accuracy = numcorrect/totalimgs
+
+        wrong_guesses_topped = [{} for i in range(62)]
+        for character in range(62):
+            for i in range(62):
+                if wrong_guesses[character][i] != 0:
+                    wrong_guesses_topped[character].update({self.label_names[i]:int(wrong_guesses[character][i])})
+
+        # SORTING
+        wrong_guesses_topped_sorted = [{} for i in range(62)]
+        guesses_dict_array = [dict() for i in range(62)]
+        for i in range(62):
+            wrong_guesses_topped_sorted[i] = sorted(wrong_guesses_topped[i].items(), key=lambda kv: kv[1], reverse=True)
+            guesses_dict_array[i] = dict(wrong_guesses_topped_sorted[i])
+            guesses_dict_array[i] = OrderedDict(itertools.islice(guesses_dict_array[i].items(), 5))
+            #print(self.label_names[i] + "\t" + str(guesses_dict_array[i]))
+
+        centeringwidth = 15
+        # COUNTING IMAGES OF EACH CHAR
+        imgcounts = [0 for i in range(62)]
+        for imgnum in range(totalimgs):
+            imgcounts[testing_labels[imgnum]] = imgcounts[testing_labels[imgnum]] + 1
+
+        key_array = [guesses_dict_array[i].keys() for i in range(62)]
+        val_array = [guesses_dict_array[i].values() for i in range(62)]
 
 
 
 
+        chars_and_accuracies = {}
+        for i in range(62):
+            if imgcounts[i]-wrong_sums[i] != 0:
+                chars_and_accuracies.update({self.label_names[i]: ((imgcounts[i]-wrong_sums[i])/imgcounts[i])*100})
+
+        chars_and_accuracies_sorted = dict(sorted(chars_and_accuracies.items(), key=lambda kv: kv[1], reverse=True))
+        chars_and_accuracies_sorted_topped = OrderedDict(itertools.islice(chars_and_accuracies_sorted.items(), 20))
+
+        chars_accuracies_key_array = list(chars_and_accuracies_sorted_topped.keys())# for i in range(20)]
+        chars_accuracies_val_array = list(chars_and_accuracies_sorted_topped.values())# for i in range(20)]
+
+
+
+
+        print("\n\n+ Model Accuracy: \n")
+        print("\t{:.2f}".format(accuracy*100) + "%")
+
+
+        print("\n\n+ Most Accurately Predicted Characters: \n")
+        print(str("  Char").rjust(centeringwidth-10) + str("Accuracy").rjust(centeringwidth))
+        print(str("  ----").rjust(centeringwidth-10) + str("--------").rjust(centeringwidth))
+        for i in range(13):
+            localval = chars_accuracies_val_array[i]
+            print(str(chars_accuracies_key_array[i]).rjust(centeringwidth-10) + str(f'{localval:.2f}' + "%").rjust(centeringwidth))
+
+
+        print("\n\n+ Categorical Accuracy: \n")
+
+        print(str("  Char").rjust(centeringwidth-10) + str("Accuracy").rjust(centeringwidth) + str("\t\t\tShare of Top Incorrect Guesses").rjust(centeringwidth)) #+ str("Total").rjust(centeringwidth) + str("Correct").rjust(centeringwidth) + str("Wrong").rjust(centeringwidth))
+        print(str("  ----").rjust(centeringwidth-10) + str("--------").rjust(centeringwidth) + str("\t\t\t----- -- --- --------- -------").rjust(centeringwidth)) #+ str("-----").rjust(centeringwidth) + str("-------").rjust(centeringwidth) + str("-----").rjust(centeringwidth))
+        for i in range(62):
+            print(str(self.label_names[i]).rjust(centeringwidth-10) + "" + str("{:.2f}".format(((imgcounts[i]-wrong_sums[i])/imgcounts[i])*100) + "%").rjust(centeringwidth), end = "\t") #+ str(imgcounts[i]).rjust(centeringwidth) + str(imgcounts[i]-wrong_sums[i]).rjust(centeringwidth) + str(wrong_sums[i]).rjust(centeringwidth), end="\t")
+            for k in range(5):
+                print("\t\t" + list(key_array[i])[k], end="")
+                print("  " + str(int(((list(val_array[i])[k])/wrong_sums[i])*100)) + "%", end = "")
+            print("")
 
 
 
