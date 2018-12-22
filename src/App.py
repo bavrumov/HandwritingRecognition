@@ -60,7 +60,7 @@ def decodeb64(str):
     #You pass a string to img_data
     img_data = str
     #Get rid of the byte header data:image/png;base64
-    img_data= img_data.replace('data:image/png;base64,', '')
+    img_data= img_data.replace('data:image/jpg;base64,', '')
 
     #Change it into byte form  b'string'
     img_data= img_data.encode()

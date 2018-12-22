@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import malestock from './static/person-male.png'
 import benjipic from './static/Team_Pics_4900/benji4900.png'
 import benpic from './static/Team_Pics_4900/kats4900.png'
 import vladPic from './static/Team_Pics_4900/vlad4900.png'
@@ -42,7 +43,13 @@ const Vlad= {
     pic: vladPic
 }
 
-var team = [Boris, Vlad, Benji, Ben];
+// const Prof={
+//     name: 'Kletenik',
+//     github: 'google.com',
+//     pic: malestock
+// }
+
+var team = [Boris, Vlad, Benji, Ben]//, Prof];
 
 export default class Carousel extends Component {
     createCarousel = () => {
